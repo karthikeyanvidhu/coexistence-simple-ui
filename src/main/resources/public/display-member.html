@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  		<!-- Loading third party fonts -->
+    <link rel="stylesheet" href="style.css"> 
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+	
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="style2.css">
+<script>
+$(document).ready(function(){
+      $.getJSON("http://localhost:8080/messages", function(data, status){
+	  var items = [];
+	  $.each( data, function( key, val ) {	  
+		$('#members').append('<div class="row">');
+		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.customerId+'></input>');
+		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.firstName+'></input>');
+		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.lastName+'></input>');
+		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.dateOfBirth+'></input>');
+		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.houseName+'></input>');
+		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.postCode+'></input>');
+		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.phoneMobile+'></input>');
+		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.phoneHome+'></input>');
+		$('#members').append('<input disabled type="text" class="col-sm-2" value='+val.email+'></input>');
+		$('#members').append('<button class="col-sm-2" >Edit Member</button>');
+		$('#members').append('</div>');
+	  });
+      //alert("Data: " + data + "\nStatus: " + status);
+  });
+});
+</script>
+</head>
+<body>
+
+		<div id="site-content">
+			<header class="site-header">
+				<div class="top-header">
+					<div class="container">
+						<a href="index.html" id="branding">
+							<img src="images/logo.png" alt="Company Name" class="logo">
+							<div class="logo-text">
+								<h2 class="site-title">Peace of Mind Life Insurance</h2>
+								<small class="description">Simplifying Life Insurance</small>
+								<a style="padding: 350px " href="#" class="phone"><img src="images/icon-phone.png" class="icon">+91 993 424 9134</a>
+							</div>						
+						   
+						</a> <!-- #branding -->	
+
+					</div> <!-- .container -->
+				</div> <!-- .top-header -->
+
+				
+				<div class="bottom-header">
+					<div class="container">
+						<div class="main-navigation">
+							<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+							<ul class="menu">
+								<li class="menu-item"><a href="index.html">Home</a></li>
+								<li class="menu-item"><a href="insurance.html">Insurance plans</a></li>
+								<li class="menu-item"><a href="new-member.html">New Member</a></li>
+								<li class="menu-item"><a href="display-member.html">Existing Members</a></li>
+							</ul> <!-- .menu -->
+						</div> <!-- .main-navigation -->	
+					
+						<div class="mobile-navigation"></div>
+					</div>
+				</div>
+		</div><!-- #site content common -->	
+		
+<div class="container-fluid">
+  <h2 class="site-title">Existing Members<p>List of Members Enrolled with Peace of Mind Life Insurance</p></h2>
+</div>
+ <div id="members" >  </div>
+
+</body>
+</html>

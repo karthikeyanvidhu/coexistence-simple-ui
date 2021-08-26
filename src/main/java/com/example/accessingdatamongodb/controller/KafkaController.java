@@ -23,13 +23,13 @@ public class KafkaController {
 	@PostMapping(value = "/inbound")
 	public String sendMessageToKafkaTopic(@RequestParam("message") String message) {
 		this.producer.sendMessage(message);
-		return "message posted to mq-inbound topic";
+		return "message posted to test-inbound topic";
 	}
 
 	@GetMapping(value = "/outbound")
 	public String sendMessageToMqKafkaTopic(@RequestParam("message") String message) {
 		this.producer.sendMessagetoMq(message);
-		return "message posted to mq-outbound topic";
+		return "message posted to test-outbound topic";
 	}
 
 }
