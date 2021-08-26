@@ -14,7 +14,7 @@
    <link rel="stylesheet" href="style2.css">
 <script>
 $(document).ready(function(){
-      $.getJSON("http://localhost:8080/messages", function(data, status){
+      $.getJSON("http://eventstream-kafka-mongo.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/messages", function(data, status){
 	  var items = [];
 	  $.each( data, function( key, val ) {	  
 		$('#members').append('<div class="row">');
