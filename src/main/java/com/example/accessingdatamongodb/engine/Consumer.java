@@ -2,6 +2,7 @@ package com.example.accessingdatamongodb.engine;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,11 @@ public class Consumer {
 		//String customerRecord="123456788;ADD;001000721;ASHISH;TEST;1900-09-21;TEST1;201;89765;8899877;8880098;ABCD@ABCD.COM";
 		String[] custInfoArray=message.split(";");
 		ListenInfo info=new ListenInfo();
+		if(custInfoArray[0]==""||custInfoArray[0].equals("NEW")) {
+			info.setCorrelationId(generateRandomDigits(8));
+		}else {
 		info.setCorrelationId(custInfoArray[0]);
+		}
 		info.setOperation(custInfoArray[1]);
 		info.setCustomerId(custInfoArray[2]);
 		info.setFirstName(custInfoArray[3]);
@@ -49,7 +54,12 @@ public class Consumer {
 		info.setEmail(custInfoArray[11]);
 		info.setTimeStamp(Instant.now().toString());		
 		infoRepo.save(info);		
-		logger.info(String.format("#### -> test-inbound Consumed message -> %s", message));		
+		System.out.println("test-inbound Consumed message:"+ message);		
 	}
-
+	
+	public String generateRandomDigits(Integer n) {
+	    Integer m = (int) Math.pow(10, n - 1);
+	    String randomNumber= ""+m + new Random().nextInt(9 * m);
+	    return randomNumber;
+	}
 }

@@ -13,11 +13,22 @@
  <link rel="stylesheet" href="style2.css">
 <script>
 $(document).ready(function(){
-  $("button").click(function(){
-      $.get("http://eventstream-kafka-mongo.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/messages", function(data, status){
-      alert("Data: " + data + "\nStatus: " + status);
-    });
-  alert("Hello");
+
+
+  
+    $("#submit").click(function(){
+       if(($("#fname").val()=='')||($("#1name").val()=='')||($("#bdate").val()=='')||($("#doorno").val()=='')||($("#address").val()=='')||($("#phone").val()=='')||($("#mobile").val()=='')||($("#email").val()=='')||($("#postalcode").val()=='') ){
+	    alert('All fields are mandatory');
+	   }else{
+		$.post("http://kafka-mongo-demo2.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/kafka/inbound",
+		  {
+			message: 'NEW'+';'+'ADD'+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val()+';'+$("#postalcode").val()
+		  },
+		  function(data, status){
+			alert("\nStatus: " + status);
+		  });
+	    alert("Message posted Successfully");				  
+	   }
   });
 });
 </script>
@@ -86,12 +97,12 @@ $(document).ready(function(){
             <i class="fas fa-calendar-alt" ></i>
           </div>
  <div class="item">
-            <label for="address1"> Door Number(4 Chars)<span>*</span></label>
-            <input id="address1" type="text"   name="address1" />
+            <label for="doorno"> Door Number(4 Chars)<span>*</span></label>
+            <input id="doorno" type="text"   name="doorno" />
           </div>
   <div class="item">
-            <label for="address2">Address(20 chars)<span>*</span></label>
-            <input id="address2" type="text"   name="address2" />
+            <label for="address">Address(20 chars)<span>*</span></label>
+            <input id="address" type="text"   name="address" />
           </div>
           <div class="item">
             <label for="phone">Phone<span>*</span></label>
@@ -102,21 +113,19 @@ $(document).ready(function(){
             <input id="mobile" type="text"   name="mobile" />
           </div>
                              <div class="item">
-            <label for="eaddress">Email Address<span>*</span></label>
-            <input id="eaddress" type="text"   name="eaddress" />
+            <label for="email">Email Address<span>*</span></label>
+            <input id="email" type="text"   name="email" />
           </div>
           <div class="item">
-            <label for="zip">Postal code<span>*</span></label>
-            <input id="zip" type="text"   name="zip" />
+            <label for="postalcode">Postal code<span>*</span></label>
+            <input id="postalcode" type="text"   name="postalcode" />
           </div>
-
          </fieldset>
-        <div class="btn-block" >		   		  
-		  <button type="submit" id="submit">Submit</button>
-        </div>
-		
-      </form>	  
+      </form>	          
     </div>
-
+		<div class="btn-block" >		   		  
+		  <button  id="submit">Submit</button>
+        </div>
+		<br>
 </body>
 </html>
