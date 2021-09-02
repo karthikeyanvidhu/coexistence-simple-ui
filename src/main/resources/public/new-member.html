@@ -20,14 +20,15 @@ $(document).ready(function(){
        if(($("#fname").val()=='')||($("#1name").val()=='')||($("#bdate").val()=='')||($("#doorno").val()=='')||($("#address").val()=='')||($("#phone").val()=='')||($("#mobile").val()=='')||($("#email").val()=='')||($("#postalcode").val()=='') ){
 	    alert('All fields are mandatory');
 	   }else{
-		$.post("http://kafka-mongo-demo3.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud:8080/kafka/inbound",
+		   //kafka-mongo-demo2.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud
+		$.post("http://kafka-mongo-demo3.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/kafka/inbound",
 		  {
 			message: 'NEW'+';'+'ADD'+';'+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val()+';'+$("#postalcode").val()
 		  },
 		  function(data, status){
-			alert("\nStatus: " + status + " Message posted to Kafka & Mongo Successfully ");
+			alert("\nStatus: " + status);
 		  });
-	    alert();				  
+	    alert("Message posted Successfully ");				  
 	   }
   });
 });
