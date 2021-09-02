@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class Producer {
 
 	private static final Logger logger = LoggerFactory.getLogger(Producer.class);
-	private static final String TOPIC = "test-inbound";
+	private static final String TOPIC = "test-outbound";
     private static final String TOPIC2= "test-outbound";
 
 	@Autowired

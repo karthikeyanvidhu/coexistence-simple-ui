@@ -30,7 +30,7 @@ public class Consumer {
 		logger.info(String.format("#### -> mq-inbound Consumed message -> %s", message));
 	}*/
 
-	@KafkaListener(topics = "test-inbound", groupId = "group_id")
+	@KafkaListener(topics = "test-outbound", groupId = "group_id")
 	public void consume(String message) throws IOException {
 		logger.info(String.format("#### -> test-inbound Consumed message -> %s", message));		
 		//String customerRecord="123456788;ADD;001000721;ASHISH;TEST;1900-09-21;TEST1;201;89765;8899877;8880098;ABCD@ABCD.COM";

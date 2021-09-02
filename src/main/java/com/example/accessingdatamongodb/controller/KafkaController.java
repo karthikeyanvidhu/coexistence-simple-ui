@@ -28,7 +28,7 @@ public class KafkaController {
 
 	@GetMapping(value = "/outbound")
 	public String sendMessageToMqKafkaTopic(@RequestParam("message") String message) {
-		this.producer.sendMessagetoMq(message);
+		this.producer.sendMessage(message);
 		return "message posted to test-outbound topic";
 	}
 
