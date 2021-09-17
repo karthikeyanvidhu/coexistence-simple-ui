@@ -1,42 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  		<!-- Loading third party fonts -->
-    <link rel="stylesheet" href="style.css"> 
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-	
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-   <link rel="stylesheet" href="style2.css">
-<script>
-$(document).ready(function(){
-      $.getJSON("http://kafka-mongo-demo3.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/messages", function(data, status){
-	  var items = [];
-	  $.each( data, function( key, val ) {	  
-		$('#members').append('<div class="row">');
-		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.customerId+'></input>');
-		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.firstName+'></input>');
-		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.lastName+'></input>');
-		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.dateOfBirth+'></input>');
-		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.houseName+'></input>');
-		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.postCode+'></input>');
-		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.phoneMobile+'></input>');
-		$('#members').append('<input disabled type="text" class="col-sm-1" value='+val.phoneHome+'></input>');
-		$('#members').append('<input disabled type="text" class="col-sm-2" value='+val.email+'></input>');
-		$('#members').append('<button class="col-sm-2" >Edit Member</button>');
-		$('#members').append('</div>');
-	  });
-      //alert("Data: " + data + "\nStatus: " + status);
-  });
-});
-</script>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Display Members</title>
+        <link rel="stylesheet" href="style.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    		<!-- Loading third party fonts -->
+    		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="fonts/lineo-icon/style.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="style.css">
+		<!-- Loading jquery lib -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
-
 		<div id="site-content">
 			<header class="site-header">
 				<div class="top-header">
@@ -44,13 +27,10 @@ $(document).ready(function(){
 						<a href="index.html" id="branding">
 							<img src="images/logo.png" alt="Company Name" class="logo">
 							<div class="logo-text">
-								<h2 class="site-title">Peace of Mind Life Insurance</h2>
+								<h1 class="site-title">Peace of Mind Life Insurance</h1>
 								<small class="description">Simplifying Life Insurance</small>
-								<a style="padding: 350px " href="#" class="phone"><img src="images/icon-phone.png" class="icon">+91 993 424 9134</a>
-							</div>						
-						   
-						</a> <!-- #branding -->	
-
+							</div>
+						</a> <!-- #branding -->
 					</div> <!-- .container -->
 				</div> <!-- .top-header -->
 
@@ -71,11 +51,94 @@ $(document).ready(function(){
 					</div>
 				</div>
 		</div><!-- #site content common -->	
-		
-<div class="container-fluid">
-  <h2 class="site-title">Existing Members<p>List of Members Enrolled with Peace of Mind Life Insurance</p></h2>
-</div>
- <div id="members" >  </div>
+<script>
+$(document).ready(function(){
+	//http://kafka-mongo-demo3.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud
+      $.getJSON("http://kafka-mongo-demo4.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/customers", function(data, status){
+	  var items = [];
+	  $.each( data, function( key, val ) {
+		    var custId=val.customerId;
+		    if(custId.length>=24) custId="To be Generated";
+		    	
+			$('#members').append('<tr>');
+			$('#members').append('<td>'+custId+'</td>');
+// 			$('#members').append('<td><br><img src="dummy/women1.jpg" alt=""><br>Customer Id:'+custId+'</td>');
+//			$('#members').append('<td><br><img src="dummy/women1.jpg" alt=""><h5 class="font-medium mb-0">'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h5>United States,'+val.postCode+'</td>');
+			$('#members').append('<td><br><h5 class="font-medium mb-0">'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h5>United States,'+val.postCode+'</td>');
+			$('#members').append('<td>'+val.dateOfBirth+'</td>');
+			$('#members').append('<td>'+val.houseName+ val.postCode+'</td>');
+			$('#members').append('<td>'+val.phoneMobile+'</td>');
+			$('#members').append('<td>'+val.email+'</td>');
+ 			$('#members').append('<td><span class="bg-success text-white">Active</span></td>');
+ 			$('#members').append('<td><button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button></td>');
+			$('#members').append('</tr>');
+			$('#members').append('<br>');
+	  });
+      //alert("Data: " + data + "\nStatus: " + status);
+  });
+      
 
+});
+</script>
+<div class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-0"><br>List of Members Enrolled with Peace of Mind Life Insurance</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table no-wrap user-table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="border-0 text-uppercase font-medium pl-4">Customer ID</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">DOB</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Address</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Mobile</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Status</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+                    </tr>
+                  </thead>
+                  <tbody id="members" >  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style type="text/css">
+
+.btn-circle.btn-lg, .btn-group-lg>.btn-circle.btn {
+    width: 50px;
+    height: 50px;
+    padding: 14px 15px;
+    font-size: 18px;
+    line-height: 23px;
+}
+.text-muted {
+    color: #8898aa!important;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.btn-circle {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+tr {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+</style>
+
+<script type="text/javascript">
+
+</script>
 </body>
 </html>

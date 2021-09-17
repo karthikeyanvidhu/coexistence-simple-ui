@@ -19,18 +19,9 @@ public class Consumer {
 	private final Logger logger = LoggerFactory.getLogger(Producer.class);
 
 	@Autowired
-	private ListenInfoRepository infoRepo;
-	
-	/*@KafkaListener(topics = "mq-inbound", groupId = "group_id")
-	public void consumed(String message) throws IOException {
-		ListenInfo info=new ListenInfo();
-		info.setInfo(message);
-		info.setTimeStamp(Instant.now().toString());
-		infoRepo.save(info);
-		logger.info(String.format("#### -> mq-inbound Consumed message -> %s", message));
-	}*/
+	private ListenInfoRepository infoRepo;	
 
-	@KafkaListener(topics = "test-outbound", groupId = "group_id")
+	@KafkaListener(topics = "${spring.kafka.topics}", groupId = "group_id")
 	public void consume(String message) throws IOException {
 		logger.info(String.format("#### -> test-inbound Consumed message -> %s", message));		
 		//String customerRecord="123456788;ADD;001000721;ASHISH;TEST;1900-09-21;TEST1;201;89765;8899877;8880098;ABCD@ABCD.COM";

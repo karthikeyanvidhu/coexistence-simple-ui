@@ -1,7 +1,7 @@
 package com.example.accessingdatamongodb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,17 +19,15 @@ public class KafkaController {
 	KafkaController(Producer producer) {
 		this.producer = producer;
 	}
-
+	
+	@Value("${spring.kafka.topics}")
+	private String TOPIC;
+	
 	@PostMapping(value = "/inbound")
 	public String sendMessageToKafkaTopic(@RequestParam("message") String message) {
-		this.producer.sendMessage(message);
+		System.out.println("message posted to test-inbound topic::"+ TOPIC);
+		this.producer.sendMessage(message,TOPIC);
 		return "message posted to test-inbound topic";
-	}
-
-	@GetMapping(value = "/outbound")
-	public String sendMessageToMqKafkaTopic(@RequestParam("message") String message) {
-		this.producer.sendMessage(message);
-		return "message posted to test-outbound topic";
 	}
 
 }

@@ -15,13 +15,23 @@ public class ListenInfoService {
 	@Autowired
 	private ListenInfoRepository infoRepo;
 	
-	public List<ListenInfo> getAllInfo(){
-		List<ListenInfo> infoList=new ArrayList<>();
-		infoRepo.findAll().forEach(infoList::add);
-		return infoList;		
+	public List<ListenInfo> getAllCustomers(){
+		List<ListenInfo> custList=new ArrayList<>();
+		infoRepo.findAll().forEach(custList::add);
+		return custList;		
 	}
 	
-	public void addInfo(ListenInfo info) {
+	public List<ListenInfo> findCustomer(String customerInfo){
+		List<ListenInfo> custList=new ArrayList<>();
+		infoRepo.findByFirstNameIgnoreCaseOrLastNameIgnoreCaseOrCustomerIdOrPhoneMobile(customerInfo,customerInfo,customerInfo,customerInfo).forEach(custList::add);
+		return custList;		
+	}
+	
+	public ListenInfo findCustomerById(String customerInfo){		
+		return infoRepo.findByCustomerId(customerInfo);
+	}
+	
+	public void addCustomer(ListenInfo info) {
 		infoRepo.save(info);
 	}
 }

@@ -13,17 +13,15 @@
  <link rel="stylesheet" href="style2.css">
 <script>
 $(document).ready(function(){
-
-
-  
+ 
     $("#submit").click(function(){
        if(($("#fname").val()=='')||($("#1name").val()=='')||($("#bdate").val()=='')||($("#doorno").val()=='')||($("#address").val()=='')||($("#phone").val()=='')||($("#mobile").val()=='')||($("#email").val()=='')||($("#postalcode").val()=='') ){
 	    alert('All fields are mandatory');
 	   }else{
 		   //kafka-mongo-demo2.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud
-		$.post("http://kafka-mongo-demo3.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/kafka/inbound",
+		$.post("http://kafka-mongo-demo4.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/kafka/inbound",
 		  {
-			message: 'NEW'+';'+'ADD'+';'+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val()+';'+$("#postalcode").val()
+			message: 'NEW'+';'+'ADD'+';'+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#postalcode").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val() 
 		  },
 		  function(data, status){
 			alert("\nStatus: " + status);

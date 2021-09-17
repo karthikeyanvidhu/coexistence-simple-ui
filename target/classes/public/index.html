@@ -4,7 +4,10 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-		
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="98953329202-nrl4c6ghu4fijgak8k46vlpqouenl86u.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>	
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 		<title>Insurance</title>
 
 		<!-- Loading third party fonts -->
@@ -13,17 +16,55 @@
 		<link href="fonts/lineo-icon/style.css" rel="stylesheet" type="text/css">
 
 		<!-- Loading main css file -->
-		<link rel="stylesheet" href="style.css">
-		
-		<!--[if lt IE 9]>
-		<script src="js/ie-support/html5.js"></script>
-		<script src="js/ie-support/respond.js"></script>
-		<![endif]-->
+		<link rel="stylesheet" href="style.css">		
 
 	</head>
-
+	
+    <script>
+    $(document).ready(function(){
+	      $('#nm').hide();
+	      $('#em').hide();
+	      
+    	$("#logout").on("click", function(){
+    		signOut() ; 
+    		$('#user').html("");
+    		});
+    	
+    });
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        $('#user').html('Admin User:'+profile.getName());
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+        
+	      $('#nm').show();
+	      $('#em').show();
+      }
+      
+      function signOut() {
+    	  
+    	    var auth2 = gapi.auth2.getAuthInstance();
+    	    auth2.signOut().then(function () {
+    	      alert("User signed out");
+    	      $('#nm').hide();
+    	      $('#em').hide();
+    	      console.log('User signed out.');
+    	    });
+    	  }
+    </script>
 
 	<body>
+	
+	    
+
 		
 		<div id="site-content">
 			<header class="site-header">
@@ -36,16 +77,11 @@
 								<small class="description">Simplifying Life Insurance</small>
 							</div>
 						</a> <!-- #branding -->
-					
-						<div class="right-section pull-right">
-							<a href="#" class="phone"><img src="images/icon-phone.png" class="icon">+91 993 424 9134</a>
-					
-							<form action="#" class="search-form">
-								<input type="text" placeholder="Search...">
-								<button type="submit"><img src="images/icon-search.png" alt=""></button>
-							</form>
-						</div>
+							 <div class="right-section pull-right g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+				        	 <a href="#" class=" right-section pull-right phone">&nbsp;&nbsp;<img src="images/icon-phone.png" class="icon">+91 993 424 9134&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					</div> <!-- .container -->
+									<a class="right-section pull-right" id="logout" onClick>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Logout</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					 				<div class="right-section pull-right" id="user" > </div>
 				</div> <!-- .top-header -->
 
 				
@@ -56,8 +92,8 @@
 							<ul class="menu">
 								<li class="menu-item"><a href="index.html">Home</a></li>
 								<li class="menu-item"><a href="insurance.html">Insurance plans</a></li>
-								<li class="menu-item"><a href="new-member.html">New Member</a></li>
-								<li class="menu-item"><a href="display-member.html">Existing Members</a></li>
+								<li class="menu-item"><div id="nm"><a href="new-member.html">New Member</a></div></li>
+								<li class="menu-item"><div id="em"><a href="display-member.html">Existing Members</a></div></li>
 							</ul> <!-- .menu -->
 						</div> <!-- .main-navigation -->	
 					
