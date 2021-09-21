@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.accessingdatamongodb.repository.ListenInfo;
@@ -28,9 +31,16 @@ public class UiController {
 		return infoService.findCustomer(customerInfo);
 	}
 	
-	@RequestMapping(value = "/customers/id/{customerId}")
+	@RequestMapping(value = "/customers/id/{customerId}",method = RequestMethod.GET)
 	public List<ListenInfo> getCustomerById(@PathVariable String customerId) {
 		return infoService.findCustomer(customerId);
+	}
+	
+	@PostMapping(value = "/customers/update")
+	public String updateCustomerId(@RequestParam("message") String message) {
+		System.out.println("Inside Update");
+		infoService.updateCustomer(message);
+		return "customer details updated";
 	}
 
 }

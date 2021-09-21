@@ -6,87 +6,89 @@
     <!--  All snippets are MIT license http://bootdey.com/license -->
     <title>Display Members</title>
         <link rel="stylesheet" href="style.css"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    		<!-- Loading third party fonts -->
-    		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	
+    	<!-- Loading third party fonts -->
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|" rel="stylesheet" type="text/css">
 		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="fonts/lineo-icon/style.css" rel="stylesheet" type="text/css">
+		<!-- Loading Google  -->
+		 <meta name="google-signin-scope" content="profile email">
+         <meta name="google-signin-client_id" content="98953329202-nrl4c6ghu4fijgak8k46vlpqouenl86u.apps.googleusercontent.com">
+		
+    	<script src="https://apis.google.com/js/platform.js" async defer></script>	
 
 		<!-- Loading main css file -->
 		<link rel="stylesheet" href="style.css">
+		
 		<!-- Loading jquery lib -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
-<body>
-		<div id="site-content">
-			<header class="site-header">
-				<div class="top-header">
-					<div class="container">
-						<a href="index.html" id="branding">
-							<img src="images/logo.png" alt="Company Name" class="logo">
-							<div class="logo-text">
-								<h1 class="site-title">Peace of Mind Life Insurance</h1>
-								<small class="description">Simplifying Life Insurance</small>
-							</div>
-						</a> <!-- #branding -->
-					</div> <!-- .container -->
-				</div> <!-- .top-header -->
-
-				
-				<div class="bottom-header">
-					<div class="container">
-						<div class="main-navigation">
-							<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-							<ul class="menu">
-								<li class="menu-item"><a href="index.html">Home</a></li>
-								<li class="menu-item"><a href="insurance.html">Insurance plans</a></li>
-								<li class="menu-item"><a href="new-member.html">New Member</a></li>
-								<li class="menu-item"><a href="display-member.html">Existing Members</a></li>
-							</ul> <!-- .menu -->
-						</div> <!-- .main-navigation -->	
-					
-						<div class="mobile-navigation"></div>
-					</div>
-				</div>
-		</div><!-- #site content common -->	
 <script>
 $(document).ready(function(){
-	//http://kafka-mongo-demo3.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud
-      $.getJSON("http://kafka-mongo-demo4.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/customers", function(data, status){
-	  var items = [];
-	  $.each( data, function( key, val ) {
+
+	 $("#header").load("header.html"); 
+	 
+     var loggedIn=localStorage['loggedIn'];
+     console.log(loggedIn);
+     if(loggedIn=='' || loggedIn==null){
+      console.log('index');
+	  window.location.href = 'index.html';
+     }
+	  var url=localStorage['baseurl'];
+	  
+	  $.fn.displayVals = function(searchStr) {
+		// Function stuff goes here
+      $.getJSON(url+'/customers/'+searchStr, function(data, status){
+	   $.each( data, function( key, val ) {
 		    var custId=val.customerId;
-		    if(custId.length>=24) custId="To be Generated";
-		    	
+		    if(custId.length>=24) custId="To be Generated";		    	
 			$('#members').append('<tr>');
 			$('#members').append('<td>'+custId+'</td>');
 // 			$('#members').append('<td><br><img src="dummy/women1.jpg" alt=""><br>Customer Id:'+custId+'</td>');
 //			$('#members').append('<td><br><img src="dummy/women1.jpg" alt=""><h5 class="font-medium mb-0">'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h5>United States,'+val.postCode+'</td>');
 			$('#members').append('<td><br><h5 class="font-medium mb-0">'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h5>United States,'+val.postCode+'</td>');
 			$('#members').append('<td>'+val.dateOfBirth+'</td>');
-			$('#members').append('<td>'+val.houseName+ val.postCode+'</td>');
+			$('#members').append('<td>'+val.houseName+'-'+ val.postCode+'</td>');
 			$('#members').append('<td>'+val.phoneMobile+'</td>');
 			$('#members').append('<td>'+val.email+'</td>');
  			$('#members').append('<td><span class="bg-success text-white">Active</span></td>');
  			$('#members').append('<td><button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button></td>');
 			$('#members').append('</tr>');
 			$('#members').append('<br>');
-	  });
-      //alert("Data: " + data + "\nStatus: " + status);
-  });
+	 	 });
+  		});
+	  }
+      
+	  $('#members').displayVals('');
+	  
+      $("#searchBtn").click(function(){
+    	  $('#members').html("");
+    	  $('#members').displayVals($("#searchTxt").val());
+      });
       
 
 });
 </script>
+<body>
+		<div id="site-content">
+		        <div id="header"></div>
+		</div><!-- #site content common -->	
+
 <div class="container">
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title mb-0"><br>List of Members Enrolled with Peace of Mind Life Insurance</h5>
+                <h5 class="card-title mb-0"><br>List of Members Enrolled with Peace of Mind Life Insurance</h5>                
             </div>
+   
+               <div>
+               		<input type="text" size="50" id="searchTxt" placeholder="Search with Name or Customer id...">
+					<button id="searchBtn">Search</button>
+				</div><br>
             <div class="table-responsive">
                 <table class="table no-wrap user-table mb-0">
                   <thead>

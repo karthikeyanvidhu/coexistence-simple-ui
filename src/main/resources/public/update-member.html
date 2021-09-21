@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="98953329202-nrl4c6ghu4fijgak8k46vlpqouenl86u.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>	
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+		<title>Insurance</title>
+
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="fonts/lineo-icon/style.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="style.css">		
+	</head>
+ <link rel="stylesheet" href="style2.css">
+<script>
+$(document).ready(function(){
+	
+ 	 $("#header").load("header.html");
+      var loggedIn=localStorage['loggedIn'];
+      console.log(loggedIn);
+     if(loggedIn=='' || loggedIn==null){
+       console.log('index');
+ 	  window.location.href = 'index.html';
+      }
+     
+	var url=localStorage['baseurl'];
+	alert(url+'/customer/id/'+$("#cid").val());
+	
+    $("#submit").click(function(){
+       if(($("#fname").val()=='')||($("#1name").val()=='')||($("#bdate").val()=='')||($("#doorno").val()=='')||($("#address").val()=='')||($("#phone").val()=='')||($("#mobile").val()=='')||($("#email").val()=='')||($("#postalcode").val()=='') ){
+	    alert('All fields are mandatory');
+	   }else{
+		   var urlfin=url+'/customer/id/'+$("#cid").val();
+		   alert(urlfin+'NEW'+';'+'UPD'+';'+$("#cid").val()+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#postalcode").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val());
+
+ 		$.post(urlfin,
+		  {
+			//message: "123411181;UPD;12345123;Aeh3;ABET;1900-09-21;TEST1;201;89765;8899877;8880098;ARUL@ABCD.COM"
+			message: 'NEW'+';'+'UPD'+';'+$("#cid").val()+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#postalcode").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val() 
+		  },
+		  function(data, status){
+			  console.log("\nStatus: " + status);
+		  }); 
+	    alert("Message posted Successfully ");		
+	    window.location.href = 'display-member.html';
+	   }
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="site-content">
+	<div id="header"></div>
+</div><!-- #site content common -->	
+		
+<div class="container">
+    <div class="testbox">	
+      <form>
+        <br/>
+        <fieldset>
+          <legend><h2>Update Member</h2></legend>
+           <div class="colums"> 
+          <div class="item">
+            <label for="cid"> Customer Id<span></span></label>
+            <input disabled id="cid" type="text" name="cid" />
+          </div>         
+          <div class="item">
+            <label for="fname"> First Name<span>*</span></label>
+            <input id="fname" type="text" name="fname" />
+          </div>
+          <div class="item">
+            <label for="fname"> Last Name<span>*</span></label>
+            <input id="lname" type="text" name="lname" />
+          </div>
+          <div class="item">
+            <label for="bdate">Birth Date <span>*</span></label>
+            <input id="bdate"  type="date" name="bdate" />
+            <i class="fas fa-calendar-alt" ></i>
+          </div>
+ 			<div class="item">
+            <label for="doorno"> Door Number(4 Chars)<span>*</span></label>
+            <input id="doorno" type="text"   name="doorno" />
+          </div>
+ 		 	<div class="item">
+            <label for="address">Address(20 chars)<span>*</span></label>
+            <input id="address" type="text"   name="address" />
+          </div>
+          <div class="item">
+            <label for="phone">Phone<span>*</span></label>
+            <input id="phone" type="tel"   name="phone" />
+          </div>
+    	  <div class="item">
+            <label for="mobile">Mobile<span>*</span></label>
+            <input id="mobile" type="text"   name="mobile" />
+          </div>
+                             <div class="item">
+            <label for="email">Email Address<span>*</span></label>
+            <input id="email" type="text"   name="email" />
+          </div>
+          <div class="item">
+            <label for="postalcode">Postal code<span>*</span></label>
+            <input id="postalcode" type="text"   name="postalcode" />
+          </div>
+          </div>
+         </fieldset>
+      </form>	          
+    </div>
+		<div class="btn-block" >		   		  
+		  <button  id="submit">Submit</button>
+        </div>
+		<br>
+		</div>
+</body>
+</html>

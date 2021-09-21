@@ -17,91 +17,19 @@
 
 		<!-- Loading main css file -->
 		<link rel="stylesheet" href="style.css">		
-
 	</head>
 	
     <script>
-    $(document).ready(function(){
-	      $('#nm').hide();
-	      $('#em').hide();
-	      
-    	$("#logout").on("click", function(){
-    		signOut() ; 
-    		$('#user').html("");
-    		});
-    	
+    $(document).ready(function(){        
+        $("#header").load("header.html");  	  
+        //localStorage['baseurl']='http://localhost:8080';
+        localStorage['baseurl']='http://kafka-mongo-demo4.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud';
     });
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        $('#user').html('Admin User:'+profile.getName());
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-        
-	      $('#nm').show();
-	      $('#em').show();
-      }
-      
-      function signOut() {
-    	  
-    	    var auth2 = gapi.auth2.getAuthInstance();
-    	    auth2.signOut().then(function () {
-    	      alert("User signed out");
-    	      $('#nm').hide();
-    	      $('#em').hide();
-    	      console.log('User signed out.');
-    	    });
-    	  }
     </script>
 
-	<body>
-	
-	    
-
-		
+	<body>		
 		<div id="site-content">
-			<header class="site-header">
-				<div class="top-header">
-					<div class="container">
-						<a href="index.html" id="branding">
-							<img src="images/logo.png" alt="Company Name" class="logo">
-							<div class="logo-text">
-								<h1 class="site-title">Peace of Mind Life Insurance</h1>
-								<small class="description">Simplifying Life Insurance</small>
-							</div>
-						</a> <!-- #branding -->
-							 <div class="right-section pull-right g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-				        	 <a href="#" class=" right-section pull-right phone">&nbsp;&nbsp;<img src="images/icon-phone.png" class="icon">+91 993 424 9134&nbsp;&nbsp;&nbsp;&nbsp;</a>
-					</div> <!-- .container -->
-									<a class="right-section pull-right" id="logout" onClick>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Logout</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-					 				<div class="right-section pull-right" id="user" > </div>
-				</div> <!-- .top-header -->
-
-				
-				<div class="bottom-header">
-					<div class="container">
-						<div class="main-navigation">
-							<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-							<ul class="menu">
-								<li class="menu-item"><a href="index.html">Home</a></li>
-								<li class="menu-item"><a href="insurance.html">Insurance plans</a></li>
-								<li class="menu-item"><div id="nm"><a href="new-member.html">New Member</a></div></li>
-								<li class="menu-item"><div id="em"><a href="display-member.html">Existing Members</a></div></li>
-							</ul> <!-- .menu -->
-						</div> <!-- .main-navigation -->	
-					
-						<div class="mobile-navigation"></div>
-					</div>
-				</div>
-				
-			</header> <!-- .site-header -->
+        <div id="header"></div>
 
 			<div class="hero hero-slider">
 				<ul class="slides">

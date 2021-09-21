@@ -1,32 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>New Member Registration</title>	
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="98953329202-nrl4c6ghu4fijgak8k46vlpqouenl86u.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>	
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+		<title>Insurance</title>
 
-	
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="fonts/lineo-icon/style.css" rel="stylesheet" type="text/css">
 
-	    <link rel="stylesheet" href="style.css"> 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="style.css">		
+	</head>
  <link rel="stylesheet" href="style2.css">
 <script>
 $(document).ready(function(){
- 
+	
+	 $("#header").load("header.html");
+     var loggedIn=localStorage['loggedIn'];
+     console.log(loggedIn);
+     if(loggedIn=='' || loggedIn==null){
+      console.log('index');
+	  window.location.href = 'index.html';
+     }
+	
+	var url=localStorage['baseurl'];
+	  
     $("#submit").click(function(){
        if(($("#fname").val()=='')||($("#1name").val()=='')||($("#bdate").val()=='')||($("#doorno").val()=='')||($("#address").val()=='')||($("#phone").val()=='')||($("#mobile").val()=='')||($("#email").val()=='')||($("#postalcode").val()=='') ){
 	    alert('All fields are mandatory');
 	   }else{
-		   //kafka-mongo-demo2.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud
-		$.post("http://kafka-mongo-demo4.dev-workload-ocp-d58a60699648ec7c305a926c930b0738-i000.us-south.containers.appdomain.cloud/kafka/inbound",
+		$.post(url+'/customer/inbound',
 		  {
 			message: 'NEW'+';'+'ADD'+';'+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#postalcode").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val() 
 		  },
 		  function(data, status){
-			alert("\nStatus: " + status);
+			  console.log("\nStatus: " + status);
 		  });
-	    alert("Message posted Successfully ");				  
+	    alert("Message posted Successfully ");		
+	    window.location.href = 'display-member.html';
 	   }
   });
 });
@@ -34,54 +52,17 @@ $(document).ready(function(){
 </head>
 <body>
 
-		<div id="site-content">
-			<header class="site-header">
-				<div class="top-header">
-					<div class="container">
-						<a href="index.html" id="branding">
-							<img src="images/logo.png" alt="Company Name" class="logo">
-							<div class="logo-text">
-								<h2 class="site-title">Peace of Mind Life Insurance</h2>
-								<small class="description">Simplifying Life Insurance</small>
-								<a style="padding: 350px " href="#" class="phone"><img src="images/icon-phone.png" class="icon">+91 993 424 9134</a>
-							</div>
-							
-							
-							
-						   
-						</a> <!-- #branding -->	
-
-					</div> <!-- .container -->
-				</div> <!-- .top-header -->
-
-				
-				<div class="bottom-header">
-					<div class="container">
-						<div class="main-navigation">
-							<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-							<ul class="menu">
-								<li class="menu-item"><a href="index.html">Home</a></li>
-								<li class="menu-item"><a href="insurance.html">Insurance plans</a></li>
-								<li class="menu-item"><a href="display-member.html">Existing Members</a></li>
-								<li class="menu-item"><a href="new-member.html">New Member</a></li>
-							</ul> <!-- .menu -->
-						</div> <!-- .main-navigation -->	
-					
-						<div class="mobile-navigation"></div>
-					</div>
-				</div>
-		</div><!-- #site content common -->	
+<div id="site-content">
+	<div id="header"></div>
+</div><!-- #site content common -->	
 		
+<div class="container">
     <div class="testbox">	
       <form>
-        <div class="banner">
-          <h1>New Member Registration</h1>
-        </div>
-        <br/>
         <br/>
         <fieldset>
-          <legend>New Member Registration</legend>
-           <div class="colums">
+          <legend><h2>New Members Register Here</h2></legend>
+           <div class="colums">          
           <div class="item">
             <label for="fname"> First Name<span>*</span></label>
             <input id="fname" type="text" name="fname" />
@@ -95,11 +76,11 @@ $(document).ready(function(){
             <input id="bdate"  type="date" name="bdate" />
             <i class="fas fa-calendar-alt" ></i>
           </div>
- <div class="item">
+ 			<div class="item">
             <label for="doorno"> Door Number(4 Chars)<span>*</span></label>
             <input id="doorno" type="text"   name="doorno" />
           </div>
-  <div class="item">
+ 		 	<div class="item">
             <label for="address">Address(20 chars)<span>*</span></label>
             <input id="address" type="text"   name="address" />
           </div>
@@ -107,7 +88,7 @@ $(document).ready(function(){
             <label for="phone">Phone<span>*</span></label>
             <input id="phone" type="tel"   name="phone" />
           </div>
-  <div class="item">
+    	  <div class="item">
             <label for="mobile">Mobile<span>*</span></label>
             <input id="mobile" type="text"   name="mobile" />
           </div>
@@ -119,6 +100,7 @@ $(document).ready(function(){
             <label for="postalcode">Postal code<span>*</span></label>
             <input id="postalcode" type="text"   name="postalcode" />
           </div>
+          </div>
          </fieldset>
       </form>	          
     </div>
@@ -126,5 +108,6 @@ $(document).ready(function(){
 		  <button  id="submit">Submit</button>
         </div>
 		<br>
+		</div>
 </body>
 </html>

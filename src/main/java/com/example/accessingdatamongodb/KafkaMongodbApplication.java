@@ -28,7 +28,7 @@ public class KafkaMongodbApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		//kafkaMsgRepository.deleteAll();
 		mongoMsgRepository.save(new ListenInfo("001000723","ADD","0012345130","sachin","cric","1900-09-21","TES12","201","89765","8899877","8880098","sachin@ABCD.COM",Instant.now().toString()));
-
+		mongoMsgRepository.delete(new ListenInfo("001000723","ADD","0012345130","sachin","cric","1900-09-21","TES12","201","89765","8899877","8880098","sachin@ABCD.COM",Instant.now().toString()));
 		// fetch all Messages
 		System.out.println("All KAFKA Messages found with findAll():");
 		System.out.println("-------------------------------");
