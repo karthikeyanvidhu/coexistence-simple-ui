@@ -31,16 +31,30 @@ $(document).ready(function(){
       }
      
 	var url=localStorage['baseurl'];
-	alert(url+'/customer/id/'+$("#cid").val());
-	
+	let searchParams = new URLSearchParams(window.location.search);
+	let param = searchParams.get('custid');
+
+	$.getJSON(url+'/customers/id/'+param, function(data, status){
+ 	   $.each( data, function( key, val ) {
+ 	 	 $("#cid").val(param);
+ 		 $("#fname").val(val.firstName);
+ 		 $("#lname").val(val.lastName);
+ 		 $("#bdate").val(val.dateOfBirth);
+ 		 $("#doorno").val(val.houseNumber);
+ 		 $("#address").val(val.houseName);
+ 		 $("#postalcode").val(val.postCode); 		
+ 		 $("#phone").val(val.phoneHome);
+ 		 $("#mobile").val(val.phoneMobile);
+ 		 $("#email").val(val.email);
+ 	 	 });
+   		});
+    
     $("#submit").click(function(){
        if(($("#fname").val()=='')||($("#1name").val()=='')||($("#bdate").val()=='')||($("#doorno").val()=='')||($("#address").val()=='')||($("#phone").val()=='')||($("#mobile").val()=='')||($("#email").val()=='')||($("#postalcode").val()=='') ){
 	    alert('All fields are mandatory');
 	   }else{
 		   var urlfin=url+'/customer/id/'+$("#cid").val();
-		   alert(urlfin+'NEW'+';'+'UPD'+';'+$("#cid").val()+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#postalcode").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val());
-
- 		$.post(urlfin,
+		$.post(urlfin,
 		  {
 			//message: "123411181;UPD;12345123;Aeh3;ABET;1900-09-21;TEST1;201;89765;8899877;8880098;ARUL@ABCD.COM"
 			message: 'NEW'+';'+'UPD'+';'+$("#cid").val()+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#postalcode").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val() 
@@ -48,7 +62,7 @@ $(document).ready(function(){
 		  function(data, status){
 			  console.log("\nStatus: " + status);
 		  }); 
-	    alert("Message posted Successfully ");		
+	    alert("Updated Successfully ");		
 	    window.location.href = 'display-member.html';
 	   }
   });

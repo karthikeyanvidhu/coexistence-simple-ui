@@ -44,18 +44,28 @@ $(document).ready(function(){
       $.getJSON(url+'/customers/'+searchStr, function(data, status){
 	   $.each( data, function( key, val ) {
 		    var custId=val.customerId;
-		    if(custId.length>=24) custId="To be Generated";		    	
+		    var status='';
+		    if(custId.length>=24) 
+		    	{
+		    	custId="To be Generated";	
+		    	status="disabled";
+		    	}
 			$('#members').append('<tr>');
 			$('#members').append('<td>'+custId+'</td>');
 // 			$('#members').append('<td><br><img src="dummy/women1.jpg" alt=""><br>Customer Id:'+custId+'</td>');
 //			$('#members').append('<td><br><img src="dummy/women1.jpg" alt=""><h5 class="font-medium mb-0">'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h5>United States,'+val.postCode+'</td>');
 			$('#members').append('<td><br><h5 class="font-medium mb-0">'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h5>United States,'+val.postCode+'</td>');
 			$('#members').append('<td>'+val.dateOfBirth+'</td>');
-			$('#members').append('<td>'+val.houseName+'-'+ val.postCode+'</td>');
+			$('#members').append('<td>'+val.houseNumber+'<br>,'+val.houseName+'-'+ val.postCode+'</td>');
 			$('#members').append('<td>'+val.phoneMobile+'</td>');
 			$('#members').append('<td>'+val.email+'</td>');
  			$('#members').append('<td><span class="bg-success text-white">Active</span></td>');
- 			$('#members').append('<td><button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button></td>');
+ 			if(status){
+ 	 			$('#members').append('<td><button '+status +' type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit "></i> </button></td>');
+ 			}else{
+ 	 			$('#members').append('<td><a href="update-member.html?custid='+custId+'"><button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button></a></td>');
+
+ 			}
 			$('#members').append('</tr>');
 			$('#members').append('<br>');
 	 	 });
@@ -118,10 +128,10 @@ $(document).ready(function(){
     height: 50px;
     padding: 14px 15px;
     font-size: 18px;
-    line-height: 23px;
+    line-height: 23px;    
 }
 .text-muted {
-    color: #8898aa!important;
+    color: red;
 }
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     cursor: pointer;

@@ -37,8 +37,8 @@ public class Consumer {
 		info.setFirstName(custInfoArray[3]);
 		info.setLastName(custInfoArray[4]);
 		info.setDateOfBirth(custInfoArray[5]);
-		info.setHouseName(custInfoArray[6]);
-		info.setHouseNumber(custInfoArray[7]);
+		info.setHouseNumber(custInfoArray[6]);
+		info.setHouseName(custInfoArray[7]);
 		info.setPostCode(custInfoArray[8]);
 		info.setPhoneHome(custInfoArray[9]);
 		info.setPhoneMobile(custInfoArray[10]);	
