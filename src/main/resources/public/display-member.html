@@ -51,16 +51,11 @@ $(document).ready(function(){
 		    	status="disabled";
 		    	}
 			$('#members').append('<tr>');
-			$('#members').append('<td>'+custId+'</td>');
-// 			$('#members').append('<td><br><img src="dummy/women1.jpg" alt=""><br>Customer Id:'+custId+'</td>');
-//			$('#members').append('<td><br><img src="dummy/women1.jpg" alt=""><h5 class="font-medium mb-0">'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h5>United States,'+val.postCode+'</td>');
-			$('#members').append('<td><br><h5 class="font-medium mb-0">'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h5>United States,'+val.postCode+'</td>');
-			$('#members').append('<td>'+val.dateOfBirth+'</td>');
-			$('#members').append('<td>'+val.houseNumber+'<br>,'+val.houseName+'-'+ val.postCode+'</td>');
-			$('#members').append('<td>'+val.phoneMobile+'</td>');
-			$('#members').append('<td>'+val.email+'</td>');
- 			$('#members').append('<td><span class="bg-success text-white">Active</span></td>');
- 			if(status){
+ 			$('#members').append('<td><br><div class="d-flex flex-column align-items-center text-center"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" height="150" width="150"><div class="mt-3"><h4>'+val.firstName+'&nbsp;&nbsp;' +val.lastName+'</h4></div></td>');
+
+			$('#members').append('<td><p class="text-secondary mb-1"><div class="col-sm-3">Id:</div><b>'+custId+'</b></p><p class="text-muted font-size-sm"><div class="col-sm-3 text-left">DOB:</div>'+val.dateOfBirth+'</p><p class="text-muted font-size-sm"><div class="col-sm-3 text-left">Mobile:</div>'+val.phoneMobile+'</p><p class="text-muted font-size-sm"><div class="col-sm-3 text-left">Email:</div>'+val.email+'</p> <p class="text-muted font-size-sm"><div class="col-sm-3">Address:</div>'+val.houseNumber+','+val.houseName+'-'+ val.postCode+'<br></p><div class="col-sm-3 text-left">Status:  </div><span class="bg-success text-white">Active</span></td>');
+
+			if(status){
  	 			$('#members').append('<td><button '+status +' type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit "></i> </button></td>');
  			}else{
  	 			$('#members').append('<td><a href="update-member.html?custid='+custId+'"><button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button></a></td>');
@@ -100,17 +95,14 @@ $(document).ready(function(){
 					<button id="searchBtn">Search</button>
 				</div><br>
             <div class="table-responsive">
+            
                 <table class="table no-wrap user-table mb-0">
                   <thead>
                     <tr>
-                      <th scope="col" class="border-0 text-uppercase font-medium pl-4">Customer ID</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">DOB</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Address</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Mobile</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Status</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+                    
+                      <th scope="col" class="border-0 text-uppercase align-items-center font-medium pl-4 text-center ">Name</th>
+                      <th scope="col" class="border-0 text-uppercase align-items-center font-medium ">Customer Information</th>
+                      <th scope="col" class="border-0 text-uppercase align-items-center font-medium ">Manage</th>
                     </tr>
                   </thead>
                   <tbody id="members" >  </tbody>
@@ -120,6 +112,7 @@ $(document).ready(function(){
     </div>
 </div>
 </div>
+
 
 <style type="text/css">
 
