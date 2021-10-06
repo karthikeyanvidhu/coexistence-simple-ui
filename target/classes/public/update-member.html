@@ -46,6 +46,7 @@ $(document).ready(function(){
  		 $("#phone").val(val.phoneHome);
  		 $("#mobile").val(val.phoneMobile);
  		 $("#email").val(val.email);
+ 		 $("#correlationid").val(val.correlationId); 		
  	 	 });
    		});
     
@@ -53,11 +54,10 @@ $(document).ready(function(){
        if(($("#fname").val()=='')||($("#1name").val()=='')||($("#bdate").val()=='')||($("#doorno").val()=='')||($("#address").val()=='')||($("#phone").val()=='')||($("#mobile").val()=='')||($("#email").val()=='')||($("#postalcode").val()=='') ){
 	    alert('All fields are mandatory');
 	   }else{
-		   var urlfin=url+'/customer/id/'+$("#cid").val();
+		   var urlfin=url+'/customers/update';
 		$.post(urlfin,
 		  {
-			//message: "123411181;UPD;12345123;Aeh3;ABET;1900-09-21;TEST1;201;89765;8899877;8880098;ARUL@ABCD.COM"
-			message: 'NEW'+';'+'UPD'+';'+$("#cid").val()+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#postalcode").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val() 
+			message: $("#correlationid").val()+';'+'UPD'+';'+$("#cid").val()+';'+$("#fname").val()+';'+$("#lname").val()+';'+$("#bdate").val()+';'+$("#doorno").val()+';'+$("#address").val()+';'+$("#postalcode").val()+';'+$("#phone").val()+';'+$("#mobile").val()+';'+$("#email").val() 
 		  },
 		  function(data, status){
 			  console.log("\nStatus: " + status);
@@ -115,7 +115,7 @@ $(document).ready(function(){
             <label for="mobile">Mobile<span>*</span></label>
             <input id="mobile" type="text"   name="mobile" />
           </div>
-                             <div class="item">
+          <div class="item">
             <label for="email">Email Address<span>*</span></label>
             <input id="email" type="text"   name="email" />
           </div>
@@ -123,6 +123,7 @@ $(document).ready(function(){
             <label for="postalcode">Postal code<span>*</span></label>
             <input id="postalcode" type="text"   name="postalcode" />
           </div>
+          <input id="correlationid" type="hidden" name="lname" />
           </div>
          </fieldset>
       </form>	          

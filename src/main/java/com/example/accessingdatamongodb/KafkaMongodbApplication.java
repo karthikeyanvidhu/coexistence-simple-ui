@@ -1,6 +1,5 @@
 package com.example.accessingdatamongodb;
 
-import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.accessingdatamongodb.repository.ListenInfo;
+import com.example.accessingdatamongodb.repository.CustomerInfo;
 import com.example.accessingdatamongodb.repository.ListenInfoRepository;
 
 @SpringBootApplication
@@ -27,13 +26,11 @@ public class KafkaMongodbApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//kafkaMsgRepository.deleteAll();
-		mongoMsgRepository.save(new ListenInfo("001000723","ADD","0012345130","sachin","cric","1900-09-21","TES12","201","89765","8899877","8880098","sachin@ABCD.COM",Instant.now().toString()));
-		mongoMsgRepository.delete(new ListenInfo("001000723","ADD","0012345130","sachin","cric","1900-09-21","TES12","201","89765","8899877","8880098","sachin@ABCD.COM",Instant.now().toString()));
 		// fetch all Messages
 		System.out.println("All KAFKA Messages found with findAll():");
 		System.out.println("-------------------------------");
-		List<ListenInfo> li=mongoMsgRepository.findByFirstNameIgnoreCaseOrLastNameIgnoreCaseOrCustomerIdOrPhoneMobile("sachin","lastname","0012345130","8880098");
-		for (ListenInfo info : li) {
+		List<CustomerInfo> li=mongoMsgRepository.findByFirstNameIgnoreCaseOrLastNameIgnoreCaseOrCustomerIdOrPhoneMobile("karthik","lastname","0012345130","8880098");
+		for (CustomerInfo info : li) {
 			System.out.println(info);
 		}
 	}

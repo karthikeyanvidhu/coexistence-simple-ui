@@ -11,12 +11,11 @@ public class Producer {
 
 	private static final Logger logger = LoggerFactory.getLogger(Producer.class);
 
-
 	@Autowired
 	private KafkaTemplate<String, String> kafkaTemplate;
 
 	public void sendMessage(String message,String topic) {
-		logger.info(String.format("#### ->users Producing message -> %s", message));
+		logger.info(String.format("#### Topic->%s message -> %s",topic,message));
 		this.kafkaTemplate.send(topic, message);
 	}
 
